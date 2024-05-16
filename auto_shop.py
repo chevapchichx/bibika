@@ -2,7 +2,6 @@ import sqlite3
 import tkinter as tk
 
 from tkinter import *
-from tkinter import messagebox
 from PIL import Image, ImageTk
 import auto_manager
 
@@ -50,7 +49,7 @@ canvas.create_window((90, 500), anchor="nw", window=auto_go_btn)
 manager_go_btn = Button(
    window,
    text="Личный кабинет",
-   command=auto_manager.clck_lk,
+   command=auto_manager.auth_lk,
    bg="#CDAA7D",
    fg="#6E7B8B",
    font=("comic sans", 11),

@@ -4,10 +4,12 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 
-from PIL import Image, ImageTk
 
-def clck_lk():
-   auth_lk()
+def toggle_password(password_entry, show_password):
+    if show_password.get():
+        password_entry.config(show="")
+    else:
+        password_entry.config(show="*")
 
 
 def auth_lk():
@@ -23,49 +25,52 @@ def auth_lk():
     frame.pack(expand=True)
 
     login_lb = Label(
-       frame,
-       text="Логин менеджера"
+        frame,
+        text="Логин менеджера"
     )
     login_lb.grid(row=3, column=1)
 
-    login_tf = Entry(
-       frame,
-    )
-    login_tf.grid(row=3, column=2)
-
     password_lb = Label(
-       frame,
-       text="Пароль менеджера"
+        frame,
+        text="Пароль менеджера"
     )
     password_lb.grid(row=4, column=1)
+
+    login_tf = Entry(
+        frame,
+    )
+    login_tf.grid(row=3, column=2)
 
     password_tf = Entry(
        frame,
     )
-    password_tf.grid(row=4, column=2)
+    password_entry.grid(row=4, column=2)
+
+    show_password = tk.BooleanVar()
+    show_password.set(False)
+
+    show_password_checkbox = tk.Checkbutton(frame, text="Показать пароль", variable=show_password, command=lambda: toggle_password(password_entry, show_password))
+    show_password_checkbox.grid(row=5, column=2)
 
     ent_btn = Button(
-       frame,
-       text="Войти",
+        frame,
+        text="Войти",
+        command=lambda: get_auth(login_tf.get(), password_entry.get(), window_lk)
     )
-    ent_btn.grid(row=5, column=2)
+    ent_btn.grid(row=6, column=2)
 
     window_lk.mainloop()
 
 
-with sqlite3.connect("auto_shop.db") as BD:
-    cursor = BD.cursor()
-    cursor.execute("SELECT ID_M, FIO, Phone_num, Login FROM manager WHERE Login =  ")
-
-    users = cursor.fetchall()
-    for user in users:
-        if Login == str(users[0]):
-            if Password == str(users[1]):
-                messagebox.showinfo('Успешно!', 'Авторизация успешно прошла')
-
-
-        messagebox.showinfo('Ошибка', 'Неверный логин или пароль')
-
-
-
+def get_auth(login, password, window_lk):
+    with sqlite3.connect("auto_shop.db") as BD:
+        cursor = BD.cursor()
+        cursor.execute("SELECT Login, Password FROM manager WHERE Login=? AND Password=?", (login, password))
+        user = cursor.fetchone()
+        if user:
+            messagebox.showinfo('Успешно!', 'Авторизация успешно прошла')
+            window_lk.destroy()
+        else:
+            messagebox.showinfo('Ошибка', 'Неверный логин или пароль')
+# auth_lk()
 
