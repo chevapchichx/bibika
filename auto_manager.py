@@ -1,5 +1,4 @@
 import sqlite3
-
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
@@ -18,9 +17,9 @@ def auth_lk():
     window_lk.geometry('350x150')
 
     frame = Frame(
-       window_lk,
-       padx=10,
-       pady=10
+        window_lk,
+        padx=10,
+        pady=10
     )
     frame.pack(expand=True)
 
@@ -41,8 +40,9 @@ def auth_lk():
     )
     login_tf.grid(row=3, column=2)
 
-    password_tf = Entry(
-       frame,
+    password_entry = Entry(
+        frame,
+        show="*",
     )
     password_entry.grid(row=4, column=2)
 
