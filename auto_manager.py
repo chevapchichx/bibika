@@ -73,4 +73,3 @@ def get_auth(login, password, window_lk):
         else:
             messagebox.showinfo('Ошибка', 'Неверный логин или пароль')
 # auth_lk()
-
