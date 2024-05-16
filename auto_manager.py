@@ -2,7 +2,7 @@ import sqlite3
 
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebbb
+from tkinter import messagebbbb
 
 from PIL import Image, ImageTk
 
