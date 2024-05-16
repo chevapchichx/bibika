@@ -56,6 +56,7 @@ def auth_lk():
 with sqlite3.connect("auto_shop.db") as BD:
     cursor = BD.cursor()
     cursor.execute("SELECT ID_M, FIO, Phone_num, Login FROM manager WHERE Login =  ")
+
     users = cursor.fetchall()
     for user in users:
         if Login == str(users[0]):
