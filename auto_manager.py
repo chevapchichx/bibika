@@ -2,10 +2,9 @@ import sqlite3
 
 import tkinter as tk
 from tkinter import *
-from tkinter import messagebbbb
+from tkinter import messagebox
 
 from PIL import Image, ImageTk
-
 
 def clck_lk():
    auth_lk()
