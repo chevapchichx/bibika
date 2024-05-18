@@ -64,7 +64,7 @@ def bibika_window(bibiki):
     # label = Label(frame, image=photo)
     # label.image = photo
     # label.pack()
-
+gggg
 
 
 
