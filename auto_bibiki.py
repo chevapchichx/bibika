@@ -46,26 +46,6 @@ def get_bibiki():
         return bibiki
 
 
-def get_image_from_db():
-    conn = sqlite3.connect('auto_shop.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT Photo FROM auto WHERE ID_A = ?", (1,))
-    image_data = cursor.fetchone()[0]
-    conn.close()
-    return image_data
-
-
-def display_image():
-    image_data = get_image_from_db()
-    image_data_io = BytesIO(image_data)
-    image = Image.open(image_data_io)
-    photo = ImageTk.PhotoImage(image)
-    window = Toplevel()
-    window.title("Image from DB")
-    window.geometry('400x300')
-    window.mainloop()
-
-
 def bibika_window(bibiki):
     window_bibika = Toplevel()
     window_bibika.title(f"{bibiki[1]} {bibiki[2]}")
