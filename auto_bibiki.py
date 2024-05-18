@@ -1,16 +1,18 @@
 import sqlite3
 import tkinter as tk
-from tkinter import *
+from tkinter import Tk, Toplevel, Frame, Button
+from io import BytesIO
 from PIL import Image, ImageTk
 from tkinter import messagebox
 
 
 def bibiki_contents_window():
     bibiki = get_bibiki()
-    window_bibiki_cont = Tk()
+    window_bibiki_cont = Toplevel()
     window_bibiki_cont.title("bibiki")
     window_bibiki_cont.geometry('250x125')
-    # window_bibiki_cont.configure(bg='#6E7B8B')
+    window_bibiki_cont.grab_set()
+    window_bibiki_cont.resizable(False, False)
 
     frame = Frame(
         window_bibiki_cont,
@@ -44,11 +46,30 @@ def get_bibiki():
         return bibiki
 
 
+def get_image_from_db():
+    conn = sqlite3.connect('auto_shop.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT Photo FROM auto WHERE ID_A = ?", (1,))
+    image_data = cursor.fetchone()[0]
+    conn.close()
+    return image_data
+
+
+def display_image():
+    image_data = get_image_from_db()
+    image_data_io = BytesIO(image_data)
+    image = Image.open(image_data_io)
+    photo = ImageTk.PhotoImage(image)
+    window = Toplevel()
+    window.title("Image from DB")
+    window.geometry('400x300')
+    window.mainloop()
+
+
 def bibika_window(bibiki):
-    bibiki = get_bibiki()
-    window_bibika = Tk()
+    window_bibika = Toplevel()
     window_bibika.title(f"{bibiki[1]} {bibiki[2]}")
-    window_bibika.geometry('250x125')
+    window_bibika.geometry('400x300')
     window_bibika.resizable(False, False)
 
     frame = Frame(
@@ -57,17 +78,3 @@ def bibika_window(bibiki):
         pady=10
     )
     frame.pack(expand=True)
-
-    # image = Image.open(bibiki[4])
-    # photo = ImageTk.PhotoImage(image)
-    #
-    # label = Label(frame, image=photo)
-    # label.image = photo
-    # label.pack()
-
-
-
-
-
-
-# bibiki_contents_window()
