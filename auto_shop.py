@@ -49,7 +49,7 @@ canvas.create_window((90, 500), anchor="nw", window=auto_go_btn)
 manager_go_btn = Button(
    window,
    text="Личный кабинет",
-   command=auto_manager.auth_lk,
+   command=auto_manager.auth_lk_window,
    bg="#CDAA7D",
    fg="#6E7B8B",
    font=("comic sans", 11),
