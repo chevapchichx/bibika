@@ -60,7 +60,7 @@ manager_go_btn = Button(
 )
 canvas.create_window((30, 10),anchor="nw", window=manager_go_btn, width=97, height=25)
 
-window_main.mainloop())
+window_main.mainloop()
 
 
 
