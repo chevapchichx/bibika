@@ -77,12 +77,15 @@ def get_auth(login_entry, password_entry, window_lk):
 def info_man_window(user):
     window_info_man = Tk()
     window_info_man.title("info manager")
-    window_info_man.geometry('420x400')
+    window_info_man.geometry('450x125')
+    window_info_man.configure(bg='#6E7B8B')
+    window_info_man.resizable(False, False)
 
     frame = Frame(
         window_info_man,
         padx=10,
-        pady=10
+        pady=10,
+        bg='#6E7B8B'
     )
     frame.pack(expand=True)
 
@@ -90,37 +93,42 @@ def info_man_window(user):
         frame,
         text="Информация о менеджере",
         font=("comic sans", 16),
-        anchor="s"
+        anchor="center",
+        bg='#6E7B8B'
     )
-    info_man_lb.grid(row=0, column=1)
+
+    info_man_lb.grid(row=0, column=2, columnspan=3)
+
+    space_lb = Label(frame, text="", bg='#6E7B8B')
+    space_lb.grid(row=1, column=0, columnspan=3)
 
     fio_man_lb = Label(
         frame,
         text="ФИО",
-        # foreground="CDAA7D",
+        bg='#6E7B8B'
     )
-    fio_man_lb.grid(row=1, column=0)
+    fio_man_lb.grid(row=2, column=1)
 
     fio_man_db = Label(
         frame,
         text=user[0],
-        # foreground="CDAA7,
+        bg='#6E7B8B'
     )
-    fio_man_db.grid(row=1, column=1)
+    fio_man_db.grid(row=2, column=3)
 
     phone_man_lb = Label(
         frame,
         text="Номер телефона",
-        # foreground="CDAA7D",
+        bg='#6E7B8B'
     )
-    phone_man_lb.grid(row=2, column=0)
+    phone_man_lb.grid(row=3, column=1)
 
     phone_man_db = Label(
         frame,
         text=user[1],
-        # foreground="CDAA7,
+        bg='#6E7B8B'
     )
-    phone_man_db.grid(row=2, column=1)
+    phone_man_db.grid(row=3, column=3)
 
 
 # auth_lk_window()
