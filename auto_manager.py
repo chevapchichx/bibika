@@ -1,8 +1,6 @@
 import sqlite3
+from tkinter import Tk, Toplevel, Frame, Label, Entry, Button, messagebox
 import tkinter as tk
-from tkinter import *
-from tkinter import messagebox
-
 
 def toggle_password(password_entry):
     if password_entry.cget('show') == '':
@@ -12,9 +10,11 @@ def toggle_password(password_entry):
 
 
 def auth_lk_window():
-    window_lk = Tk()
+    window_lk = Toplevel()
     window_lk.title("lk")
     window_lk.geometry('350x150')
+    window_lk.grab_set()
+    window_lk.resizable(False, False)
 
     frame = Frame(
         window_lk,
@@ -75,10 +75,11 @@ def get_auth(login_entry, password_entry, window_lk):
 
 
 def info_man_window(user):
-    window_info_man = Tk()
+    window_info_man = Toplevel()
     window_info_man.title("info manager")
     window_info_man.geometry('450x125')
     window_info_man.configure(bg='#6E7B8B')
+    window_info_man.grab_set()
     window_info_man.resizable(False, False)
 
     frame = Frame(
@@ -129,8 +130,3 @@ def info_man_window(user):
         bg='#6E7B8B'
     )
     phone_man_db.grid(row=3, column=3)
-
-
-# auth_lk_window()
-
-
