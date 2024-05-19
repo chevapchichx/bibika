@@ -1,85 +1,42 @@
 import sqlite3
 import tkinter as tk
-from tkinter import Frame, Button, BOTH
+from tkinter import Tk, Toplevel, Frame, Button
+from io import BytesIO
 from PIL import Image, ImageTk
+from tkinter import messagebox
 
-def bibiki_contents_window(parent_frame, back_callback):
+
+def bibiki_contents_window():
     bibiki = get_bibiki()
+    window_bibiki_cont = Toplevel()
+    window_bibiki_cont.title("bibiki")
+    window_bibiki_cont.geometry('250x125')
+    window_bibiki_cont.grab_set()
+    window_bibiki_cont.resizable(False, False)
 
-    for widget in parent_frame.winfo_children():
-        widget.destroy()
-
-    frame = Frame(parent_frame, padx=10, pady=10)
-    frame.pack(expand=True, fill=BOTH)
-
-    back_btn = Button(
-        parent_frame,
-        text="Назад",
-        command=back_callback,
-        bg="#CDAA7D",
-        fg="#6E7B8B",
-        font=("comic sans", 14),
-        borderwidth=0,
-        width=12,
-        height=2,
+    frame = Frame(
+        window_bibiki_cont,
+        padx=10,
+        pady=10
     )
-    back_btn.pack(side="top", anchor="ne", pady=10, padx=10)
+    frame.pack(expand=True)
 
-    buttons_frame = Frame(frame)
-    buttons_frame.pack(expand=True)
-
-    for i in range(len(bibiki)):
+    for i in range(0, len(bibiki)):
         bibiki_lb = Button(
-            buttons_frame,
+            frame,
             text=f"{bibiki[i][1]} {bibiki[i][2]}",
             font=("comic sans", 14),
             bg="#CDAA7D",
             fg="#6E7B8B",
             borderwidth=0,
-            width=20,
-            height=2,
-            command=lambda i=i: bibika_window(bibiki[i], frame, lambda: bibiki_contents_window(parent_frame, back_callback)),
+            width=12,
+            height=1,
+            command=lambda i=i: bibika_window(bibiki[i]),
         )
-        bibiki_lb.pack(pady=10)
+        bibiki_lb.grid(row=i, column=0, columnspan=3)
 
-def manager_bibiki_contents_window(parent_frame, user, back_callback):
-    manager_bibiki = get_manager_bibiki(user)
+    window_bibiki_cont.mainloop()
 
-    for widget in parent_frame.winfo_children():
-        widget.destroy()
-
-    frame = Frame(parent_frame, padx=10, pady=10)
-    frame.pack(expand=True, fill=BOTH)
-
-    back_btn = Button(
-        parent_frame,
-        text="Назад",
-        command=back_callback,
-        bg="#CDAA7D",
-        fg="#6E7B8B",
-        font=("comic sans", 14),
-        borderwidth=0,
-        width=12,
-        height=2,
-    )
-    back_btn.pack(side="top", anchor="ne", pady=10, padx=10)
-
-    buttons_frame = Frame(frame)
-    buttons_frame.pack(expand=True)
-
-    for i in range(len(manager_bibiki)):
-        bibiki_lb = Button(
-            buttons_frame,
-            text=f"{manager_bibiki[i][1]} {manager_bibiki[i][2]}",
-            font=("comic sans", 14),
-            bg="#CDAA7D",
-            fg="#6E7B8B",
-            borderwidth=0,
-            width=20,
-            height=2,
-            command=lambda i=i: bibika_window(manager_bibiki[i], frame, lambda: manager_bibiki_contents_window(parent_frame, user, back_callback)),
-        )
-        bibiki_lb.pack(pady=10)
 
 def get_bibiki():
     with sqlite3.connect("auto_shop.db") as BD:
@@ -88,36 +45,36 @@ def get_bibiki():
         bibiki = cursor.fetchall()
         return bibiki
 
-def get_manager_bibiki(user):
-    with sqlite3.connect("auto_shop.db") as BD:
-        cursor = BD.cursor()
-        cursor.execute("SELECT ID_A, Brand, Model, Price, Photo, Description FROM auto WHERE Manager=?", (user[2],))
-        manager_bibiki = cursor.fetchall()
-        return manager_bibiki
 
-def bibika_window(bibiki, parent_frame, back_callback):
-    for widget in parent_frame.winfo_children():
-        widget.destroy()
+def get_image_from_db():
+    conn = sqlite3.connect('auto_shop.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT Photo FROM auto WHERE ID_A = ?", (1,))
+    image_data = cursor.fetchone()[0]
+    conn.close()
+    return image_data
 
-    frame = Frame(parent_frame, padx=10, pady=10)
-    frame.pack(expand=True, fill=BOTH)
 
-    image = Image.open(bibiki[4])
+def display_image():
+    image_data = get_image_from_db()
+    image_data_io = BytesIO(image_data)
+    image = Image.open(image_data_io)
     photo = ImageTk.PhotoImage(image)
+    window = Toplevel()
+    window.title("Image from DB")
+    window.geometry('400x300')
+    window.mainloop()
 
-    label = tk.Label(frame, image=photo, width=200, height=200)
-    label.image = photo
-    label.pack()
 
-    back_btn = Button(
-        frame,
-        text="Назад",
-        command=back_callback,
-        bg="#CDAA7D",
-        fg="#6E7B8B",
-        font=("comic sans", 14),
-        borderwidth=0,
-        width=12,
-        height=2,
+def bibika_window(bibiki):
+    window_bibika = Toplevel()
+    window_bibika.title(f"{bibiki[1]} {bibiki[2]}")
+    window_bibika.geometry('400x300')
+    window_bibika.resizable(False, False)
+
+    frame = Frame(
+        window_bibika,
+        padx=10,
+        pady=10
     )
-    back_btn.pack(side="top", anchor="nw", pady=20, padx=20)
+    frame.pack(expand=True)
