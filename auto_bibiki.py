@@ -6,7 +6,6 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 
 
-
 def bibiki_contents_window(parent_frame, main_window_open):
     # global parentt_frame
     parent_frame = parent_frame
