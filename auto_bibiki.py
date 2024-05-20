@@ -141,6 +141,7 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     )
     back_btn.place(x=750, y=555)
 
+
 def bibiki_change_window(window_bibiki_change, main_window_func):
     window_bibiki_change.title('my bibikas')
     window_bibiki_change.geometry('850x600')
@@ -174,10 +175,4 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
     back_btn.place(x=750, y=555)
     back_btn.lift()
 
-
-
-
-
 # bibiki_contents_window(parent_frame=tk.Tk())
-
-

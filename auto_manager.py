@@ -75,7 +75,8 @@ def get_auth(login_entry, password_entry, window_lk, my_bibiki_button):
     password = password_entry.get()
     with sqlite3.connect("db/auto_shop.db") as BD:
         cursor = BD.cursor()
-        cursor.execute("SELECT FIO, Phone_num, Login, Password FROM manager WHERE Login=? AND Password=?", (login, password))
+        cursor.execute("SELECT FIO, Phone_num, Login, Password FROM manager WHERE Login=? AND Password=?",
+                       (login, password))
         user = cursor.fetchone()
         if user:
             for widget in window_lk.winfo_children():
@@ -139,7 +140,5 @@ def info_man_window(window_lk, user, my_bibiki_button):
     phone_man_db.grid(row=3, column=1, columnspan=1, sticky=tk.E)
 
     my_bibiki_button()
-
-
 
 # auth_lk_window()
