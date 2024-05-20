@@ -63,20 +63,20 @@ def info_man_window(user):
     frame = Frame(window_info_man, padx=0, pady=0)
     frame.pack(expand=True)
 
-    info_man_lb = Label(frame, text="Информация о менеджере", font=("comic sans", 16), anchor="center", fg='#FFF5EE')
+    info_man_lb = Label(frame, text="Информация о менеджере", font=("comic sans", 16), anchor="center")
     info_man_lb.grid(row=0, column=0, columnspan=3, sticky=tk.W + tk.E + tk.N)
 
-    space_lb = Label(frame, text="", fg='#FFF5EE')
+    space_lb = Label(frame, text="")
     space_lb.grid(row=1, column=0, columnspan=3)
 
-    fio_man_lb = Label(frame, text="ФИО", fg='#FFF5EE')
+    fio_man_lb = Label(frame, text="ФИО")
     fio_man_lb.grid(row=2, column=0, columnspan=1, sticky=tk.W)
 
-    fio_man_db = Label(frame, text=user[0], fg='#FFF5EE')
+    fio_man_db = Label(frame, text=user[0])
     fio_man_db.grid(row=2, column=1, columnspan=1, sticky=tk.E)
 
-    phone_man_lb = Label(frame, text="Номер телефона", fg='#FFF5EE')
+    phone_man_lb = Label(frame, text="Номер телефона")
     phone_man_lb.grid(row=3, column=0, columnspan=1, sticky=tk.W)
 
-    phone_man_db = Label(frame, text=user[1], fg='#FFF5EE')
+    phone_man_db = Label(frame, text=user[1])
     phone_man_db.grid(row=3, column=1, columnspan=1, sticky=tk.E)
