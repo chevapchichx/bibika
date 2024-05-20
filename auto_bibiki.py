@@ -5,12 +5,11 @@ from io import BytesIO
 from PIL import Image, ImageTk
 from tkinter import messagebox
 
+# from auto_shop import go_back_1
 
-def bibiki_contents_window(parent_frame, main_window_open):
-    # global parentt_frame
-    parent_frame = parent_frame
 
-    parent_frame.title("bibika")
+def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
+    parent_frame.title("bibiki")
     parent_frame.grab_set()
 
     bibiki = get_bibiki()
@@ -25,7 +24,7 @@ def bibiki_contents_window(parent_frame, main_window_open):
     def open_bibika_window(i):
         for widget in parent_frame.winfo_children():
             widget.destroy()
-        bibika_window(parent_frame, bibiki[i], bibiki_contents_window)
+        bibika_window(parent_frame, bibiki[i], bibiki_contents_window, main_window_func)
 
     for i in range(0, len(bibiki)):
         bibiki_btn = Button(
@@ -43,7 +42,7 @@ def bibiki_contents_window(parent_frame, main_window_open):
 
     def go_back_1():
         parent_frame.destroy()
-        main_window_open()
+        main_window_func()
 
     back_btn = Button(
         frame,
@@ -59,7 +58,7 @@ def bibiki_contents_window(parent_frame, main_window_open):
     )
     back_btn.pack(side="bottom", pady=10)
 
-    parent_frame.mainloop()
+    # parent_frame.mainloop()
 
 
 def get_bibiki():
@@ -79,7 +78,7 @@ def get_image_from_db(bibiki):
     return image_data
 
 
-def bibika_window(parent_frame, bibiki, bibiki_c_window_open):
+def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     parent_frame.title(f"{bibiki[1]} {bibiki[2]}")
     parent_frame.geometry('850x600')
     parent_frame.grab_set()
@@ -132,7 +131,7 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open):
     def go_back_2():
         for widget in parent_frame.winfo_children():
             widget.destroy()
-        bibiki_c_window_open(parent_frame, bibiki_c_window_open)
+        bibiki_c_window_open(parent_frame, bibiki_c_window_open, main_window_func)
 
     back_btn = Button(
         frame,
