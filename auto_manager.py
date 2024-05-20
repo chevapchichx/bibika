@@ -35,7 +35,7 @@ def auth_lk_window():
     password_lb = Label(
         frame,
         text="Пароль менеджера",
-        fg = '#FFF5EE',
+        fg='#FFF5EE',
     )
     password_lb.grid(row=4, column=1)
 
