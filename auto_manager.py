@@ -56,7 +56,7 @@ def get_auth(login, password):
 
 def info_man_window(user):
     window_info_man = Toplevel()
-    window_info_man.title("Информация о менеджере")
+    window_info_man.title("info manager")
     window_info_man.geometry('360x140+695+70')
     window_info_man.resizable(False, False)
 
