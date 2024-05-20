@@ -2,6 +2,7 @@ import sqlite3
 from tkinter import Tk, Toplevel, Frame, Label, Entry, Button, messagebox
 import tkinter as tk
 
+import importlib
 
 def toggle_password(password_entry):
     if password_entry.cget('show') == '':
@@ -10,7 +11,7 @@ def toggle_password(password_entry):
         password_entry.config(show='')
 
 
-def auth_lk_window():
+def auth_lk_window(my_bibiki_button):
     window_lk = Toplevel()
     window_lk.title("lk")
     window_lk.geometry('360x140')
@@ -55,7 +56,7 @@ def auth_lk_window():
     show_pass_checkbox.grid(row=5, column=2)
 
     def open_info_man_window():
-        get_auth(login_entry, password_entry, window_lk)
+        get_auth(login_entry, password_entry, window_lk, my_bibiki_button)
 
     ent_btn = Button(
         frame,
@@ -70,7 +71,7 @@ def auth_lk_window():
     window_lk.mainloop()
 
 
-def get_auth(login_entry, password_entry, window_lk):
+def get_auth(login_entry, password_entry, window_lk, my_bibiki_button):
     login = login_entry.get()
     password = password_entry.get()
     with sqlite3.connect("db/auto_shop.db") as BD:
@@ -80,13 +81,13 @@ def get_auth(login_entry, password_entry, window_lk):
         if user:
             for widget in window_lk.winfo_children():
                 widget.destroy()
-            info_man_window(window_lk, user)
+            info_man_window(window_lk, user, my_bibiki_button)
         else:
             messagebox.showinfo('Ошибка', 'Неверный логин или пароль')
 
 
-def info_man_window(window_lk, user):
-    # window_info_man = Toplevel()
+def info_man_window(window_lk, user, my_bibiki_button):
+    # importlib.import_module('auto_shop').my_bibiki_btn.place(x=820, y=10, anchor="ne", width=97, height=25)  # Сделать кнопку видимой
     window_lk.title("info manager")
     window_lk.geometry('360x140')
     window_lk.grab_set()
@@ -139,7 +140,8 @@ def info_man_window(window_lk, user):
     )
     phone_man_db.grid(row=3, column=1, columnspan=1, sticky=tk.E)
 
-    # my_bibiki_btn_callback(user)
+    my_bibiki_button()
+
 
 
 # auth_lk_window()

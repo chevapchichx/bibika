@@ -6,6 +6,7 @@ from tkinter import Tk, Toplevel, Frame, Button, Label
 # import auto_bibiki
 import auto_bibiki
 import auto_manager
+import importlib
 
 
 def main_window():
@@ -26,10 +27,33 @@ def main_window():
    canvas.pack(side="top", fill="both", expand="no")
    canvas.create_image(0, 0, anchor="nw", image=image)
 
+   def open_info_man_windoww():
+       for widget in window_main.winfo_children():
+           widget.destroy()
+       auto_manager.info_man_window(window_main, user=None, my_bibiki_button=my_bibiki_button)
+   def my_bibiki_button():
+       my_bibiki_btn = Button(
+           window_main,
+           text="Мои бибики",
+           command=open_my_bibiki_window,
+           bg="#CDAA7D",
+           fg="#6E7B8B",
+           font=("comic sans", 11),
+           relief="flat",
+           borderwidth=0,
+       )
+       canvas.create_window((820, 10), anchor="ne", window=my_bibiki_btn, width=97, height=25)
    def open_bibiki_contents_window():
-      for widget in window_main.winfo_children():
-         widget.destroy()
-      auto_bibiki.bibiki_contents_window(window_main, open_bibiki_contents_window, main_window)
+       for widget in window_main.winfo_children():
+           widget.destroy()
+       auto_bibiki.bibiki_contents_window(window_main, open_bibiki_contents_window, main_window)
+
+   def open_my_bibiki_window():
+       for widget in window_main.winfo_children():
+           widget.destroy()
+       auto_bibiki.bibiki_change_window(window_main, main_window)
+
+   # my_bibiki_btn.place(x=820, y=10, anchor="ne", width=97, height=25)
 
    auto_go_btn = Button(
       window_main,
@@ -46,7 +70,7 @@ def main_window():
    manager_go_btn = Button(
       window_main,
       text="Личный кабинет",
-      command=auto_manager.auth_lk_window,
+      command=lambda: auto_manager.auth_lk_window(my_bibiki_button),
       bg="#CDAA7D",
       fg="#6E7B8B",
       font=("comic sans", 11),
@@ -54,7 +78,6 @@ def main_window():
       borderwidth=0,
       )
    canvas.create_window((30, 10),anchor="nw", window=manager_go_btn, width=97, height=25)
-
 
    window_main.mainloop()
 
