@@ -26,13 +26,16 @@ def auth_lk_window():
 
     login_lb = Label(
         frame,
-        text="Логин менеджера"
+        text="Логин менеджера",
+        fg='#FFF5EE'
+
     )
     login_lb.grid(row=3, column=1)
 
     password_lb = Label(
         frame,
-        text="Пароль менеджера"
+        text="Пароль менеджера",
+        fg = '#FFF5EE',
     )
     password_lb.grid(row=4, column=1)
 
@@ -44,6 +47,7 @@ def auth_lk_window():
     password_entry = Entry(
         frame,
         show="*",
+        fg='#FFF5EE'
     )
     password_entry.grid(row=4, column=2)
 
@@ -56,7 +60,10 @@ def auth_lk_window():
     ent_btn = Button(
         frame,
         text="Войти",
-        command=open_info_man_window
+        command=open_info_man_window,
+        bg='#FFF5EE',
+        fg='#6E7B8B'
+
     )
     ent_btn.grid(row=6, column=2)
 
@@ -82,7 +89,6 @@ def info_man_window(window_lk, user):
     # window_info_man = Toplevel()
     window_lk.title("info manager")
     window_lk.geometry('360x140')
-    window_lk.configure(bg='#6E7B8B')
     window_lk.grab_set()
     window_lk.resizable(False, False)
 
@@ -90,7 +96,6 @@ def info_man_window(window_lk, user):
         window_lk,
         padx=0,
         pady=0,
-        bg='#6E7B8B'
     )
     frame.pack(expand=True)
 
@@ -99,38 +104,38 @@ def info_man_window(window_lk, user):
         text="Информация о менеджере",
         font=("comic sans", 16),
         anchor="center",
-        bg='#6E7B8B'
+        fg='#FFF5EE'
     )
     info_man_lb.grid(row=0, column=0, columnspan=3, sticky=tk.W + tk.E + tk.N)
 
-    space_lb = Label(frame, text="", bg='#6E7B8B')
+    space_lb = Label(frame, text="", fg='#FFF5EE')
     space_lb.grid(row=1, column=0, columnspan=3)
 
     fio_man_lb = Label(
         frame,
         text="ФИО",
-        bg='#6E7B8B'
+        fg='#FFF5EE'
     )
     fio_man_lb.grid(row=2, column=0, columnspan=1, sticky=tk.W)
 
     fio_man_db = Label(
         frame,
         text=user[0],
-        bg='#6E7B8B'
+        fg='#FFF5EE'
     )
     fio_man_db.grid(row=2, column=1, columnspan=1, sticky=tk.E)
 
     phone_man_lb = Label(
         frame,
         text="Номер телефона",
-        bg='#6E7B8B'
+        fg='#FFF5EE'
     )
     phone_man_lb.grid(row=3, column=0, columnspan=1, sticky=tk.W)
 
     phone_man_db = Label(
         frame,
         text=user[1],
-        bg='#6E7B8B'
+        fg='#FFF5EE'
     )
     phone_man_db.grid(row=3, column=1, columnspan=1, sticky=tk.E)
 

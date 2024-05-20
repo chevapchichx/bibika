@@ -5,8 +5,6 @@ from io import BytesIO
 from PIL import Image, ImageTk
 from tkinter import messagebox
 
-# from auto_shop import go_back_1
-
 
 def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
     parent_frame.title("bibiki")
@@ -31,7 +29,6 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
             frame,
             text=f"{bibiki[i][1]} {bibiki[i][2]}",
             font=("comic sans", 14),
-            # bg="#CDAA7D",
             fg="#6E7B8B",
             borderwidth=0,
             width=20,
@@ -102,7 +99,6 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
         width=850,
         height=500,
         borderwidth=0,
-        # bg='#696969'
     )
     bibika_photo.image = photo
     bibika_photo.pack()
