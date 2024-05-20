@@ -142,35 +142,35 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     back_btn.place(x=750, y=555)
 
 
-def bibiki_change_window(window_bibiki_change, main_window_func):
-    window_bibiki_change.title('my bibikas')
-    window_bibiki_change.geometry('850x600')
-    window_bibiki_change.resizable(False, False)
-
-    frame = Frame(
-        window_bibiki_change,
-        padx=0,
-        pady=0,
-    )
-    frame.pack()
-
-    def go_back_3():
-        window_bibiki_change.destroy()
-        main_window_func()
-
-    back_btn = Button(
-        window_bibiki_change,
-        text="Назад",
-        command=go_back_3,
-        # bg="#CDAA7D",
-        fg="#6E7B8B",
-        font=("comic sans", 11),
-        relief="flat",
-        borderwidth=0,
-        width=6,
-        height=1,
-    )
-    back_btn.place(x=750, y=555)
-    back_btn.lift()
+# def bibiki_change_window(window_bibiki_change, main_window_func):
+#     window_bibiki_change.title('my bibikas')
+#     window_bibiki_change.geometry('850x600')
+#     window_bibiki_change.resizable(False, False)
+#
+#     frame = Frame(
+#         window_bibiki_change,
+#         padx=0,
+#         pady=0,
+#     )
+#     frame.pack()
+#
+#     def go_back_3():
+#         window_bibiki_change.destroy()
+#         main_window_func()
+#
+#     back_btn = Button(
+#         window_bibiki_change,
+#         text="Назад",
+#         command=go_back_3,
+#         # bg="#CDAA7D",
+#         fg="#6E7B8B",
+#         font=("comic sans", 11),
+#         relief="flat",
+#         borderwidth=0,
+#         width=6,
+#         height=1,
+#     )
+#     back_btn.place(x=750, y=555)
+#     back_btn.lift()
 
 # bibiki_contents_window(parent_frame=tk.Tk())
