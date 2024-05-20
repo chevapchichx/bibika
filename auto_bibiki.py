@@ -152,9 +152,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         padx=0,
         pady=0,
     )
-    frame.grid()
-    window_bibiki_change.grid_rowconfigure(0, weight=1)  # Новая строка
-    window_bibiki_change.grid_columnconfigure(0, weight=1)
+    frame.pack()
 
     def go_back_3():
         window_bibiki_change.destroy()
