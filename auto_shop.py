@@ -1,5 +1,4 @@
 import tkinter as tk
-# import sqlite3
 from PIL import Image, ImageTk
 from tkinter import Tk, Frame, Button
 
@@ -10,19 +9,22 @@ import auto_manager
 def add_my_bibiki_button(window_main, canvas, login, password):
     user = auto_manager.get_auth(login, password)
     if user:
+        global my_bibiki_btn
         my_bibiki_btn = Button(
             window_main,
             text=f"{user[2]}",
-            command=lambda: auto_manager.info_man_window(user),
+            command=lambda: auto_manager.info_man_window(user, main_window, window_main),
             fg="#6E7B8B",
             font=("comic sans", 11),
             relief="flat",
             borderwidth=0,
         )
-        canvas.create_window((820, 10), anchor="ne", window=my_bibiki_btn, width=120, height=25)
+        canvas.create_window((30, 10), anchor="nw", window=my_bibiki_btn, width=115, height=25)
 
 
 def main_window():
+    global manager_go_btn, window_main, canvas
+
     window_main = Tk()
     window_main.title("bibika.ru")
     window_main.geometry('850x600')
