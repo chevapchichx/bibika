@@ -1,12 +1,10 @@
 import tkinter as tk
-import sqlite3
+# import sqlite3
 from PIL import Image, ImageTk
 from tkinter import Tk, Frame, Button
 
 import auto_bibiki
 import auto_manager
-
-global window_main, canvas
 
 
 def add_my_bibiki_button(window_main, canvas, login, password):

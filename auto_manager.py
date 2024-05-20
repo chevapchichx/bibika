@@ -1,5 +1,5 @@
 import sqlite3
-from tkinter import Toplevel, Frame, Label, Entry, Button, messagebox
+from tkinter import Toplevel, Frame, Label, Entry, Button, messagebox, Tk
 import tkinter as tk
 
 
@@ -13,7 +13,7 @@ def toggle_password(password_entry):
 def auth_lk_window(add_my_bibiki_button):
     window_lk = Toplevel()
     window_lk.title("lk")
-    window_lk.geometry('360x140')
+    window_lk.geometry('360x140+228+70')
     window_lk.grab_set()
     window_lk.resizable(False, False)
 
@@ -55,12 +55,12 @@ def get_auth(login, password):
 
 
 def info_man_window(user):
-    window_lk = Toplevel()
-    window_lk.title("Информация о менеджере")
-    window_lk.geometry('360x140')
-    window_lk.resizable(False, False)
+    window_info_man = Toplevel()
+    window_info_man.title("Информация о менеджере")
+    window_info_man.geometry('360x140+695+70')
+    window_info_man.resizable(False, False)
 
-    frame = Frame(window_lk, padx=0, pady=0)
+    frame = Frame(window_info_man, padx=0, pady=0)
     frame.pack(expand=True)
 
     info_man_lb = Label(frame, text="Информация о менеджере", font=("comic sans", 16), anchor="center", fg='#FFF5EE')
