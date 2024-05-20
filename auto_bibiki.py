@@ -24,7 +24,6 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
             widget.destroy()
         bibika_window(parent_frame, bibiki[i], bibiki_contents_window, main_window_func)
 
-
     for i in range(0, len(bibiki)):
         bibiki_btn = Button(
             frame,
@@ -55,8 +54,6 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
         height=1,
     )
     back_btn.pack(side="bottom", pady=10)
-
-    # parent_frame.mainloop()
 
 
 def get_bibiki():
@@ -145,7 +142,6 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     back_btn.place(x=750, y=555)
 
 def bibiki_change_window(window_bibiki_change, main_window_func):
-    # window_bibiki_change = Toplevel()
     window_bibiki_change.title('my bibikas')
     window_bibiki_change.geometry('850x600')
     window_bibiki_change.resizable(False, False)

@@ -1,16 +1,12 @@
-import sqlite3
 import tkinter as tk
 from PIL import Image, ImageTk
 from tkinter import Tk, Toplevel, Frame, Button, Label
 
-# import auto_bibiki
 import auto_bibiki
 import auto_manager
-import importlib
 
 
 def main_window():
-
    window_main = Tk()
    window_main.title("bibika.ru")
    window_main.geometry('850x600')
@@ -28,10 +24,10 @@ def main_window():
    canvas.pack(side="top", fill="both", expand="no")
    canvas.create_image(0, 0, anchor="nw", image=image)
 
-   def open_info_man_windoww():
+   def open_my_bibiki_window():
        for widget in window_main.winfo_children():
            widget.destroy()
-       auto_manager.info_man_window(window_main, user=None, my_bibiki_button=my_bibiki_button)
+       auto_bibiki.bibiki_change_window(window_main, main_window)
 
    def my_bibiki_button():
        my_bibiki_btn = Button(
@@ -45,16 +41,11 @@ def main_window():
            borderwidth=0,
        )
        canvas.create_window((820, 10), anchor="ne", window=my_bibiki_btn, width=97, height=25)
+
    def open_bibiki_contents_window():
        for widget in window_main.winfo_children():
            widget.destroy()
        auto_bibiki.bibiki_contents_window(window_main, open_bibiki_contents_window, main_window)
-
-   def open_my_bibiki_window():
-       for widget in window_main.winfo_children():
-           widget.destroy()
-       auto_bibiki.bibiki_change_window(window_main, main_window)
-
 
    auto_go_btn = Button(
       window_main,
@@ -85,20 +76,7 @@ def main_window():
 
 main_window()
 
-# my_bibiki_btn = None
-
-# def add_my_bibiki_button(user):
-#    global my_bibiki_btn
-#    if my_bibiki_btn is not None:
-#       my_bibiki_btn.destroy()
-#    my_bibiki_btn = Button(
-#       frame,
-#       text="Мои бибики",
-#       command=open_bibiki_contents_window,
-#       bg="#CDAA7D",
-#       fg="#6E7B8B",
-#       font=("comic sans", 11),
-#       relief="flat",
-#       borderwidth=0,
-#    )
-#    canvas.create_window((750, 10), anchor="ne", window=my_bibiki_btn, width=97, height=25)
+# def open_info_man_windoww():
+#     for widget in window_main.winfo_children():
+#         widget.destroy()
+#     auto_manager.info_man_window(window_main, user=None, my_bibiki_button=my_bibiki_button)

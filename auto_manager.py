@@ -2,7 +2,6 @@ import sqlite3
 from tkinter import Tk, Toplevel, Frame, Label, Entry, Button, messagebox
 import tkinter as tk
 
-import importlib
 
 def toggle_password(password_entry):
     if password_entry.cget('show') == '':
@@ -87,7 +86,6 @@ def get_auth(login_entry, password_entry, window_lk, my_bibiki_button):
 
 
 def info_man_window(window_lk, user, my_bibiki_button):
-    # importlib.import_module('auto_shop').my_bibiki_btn.place(x=820, y=10, anchor="ne", width=97, height=25)  # Сделать кнопку видимой
     window_lk.title("info manager")
     window_lk.geometry('360x140')
     window_lk.grab_set()
