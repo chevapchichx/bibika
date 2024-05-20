@@ -10,6 +10,7 @@ import importlib
 
 
 def main_window():
+
    window_main = Tk()
    window_main.title("bibika.ru")
    window_main.geometry('850x600')
@@ -31,6 +32,7 @@ def main_window():
        for widget in window_main.winfo_children():
            widget.destroy()
        auto_manager.info_man_window(window_main, user=None, my_bibiki_button=my_bibiki_button)
+
    def my_bibiki_button():
        my_bibiki_btn = Button(
            window_main,
@@ -53,7 +55,6 @@ def main_window():
            widget.destroy()
        auto_bibiki.bibiki_change_window(window_main, main_window)
 
-   # my_bibiki_btn.place(x=820, y=10, anchor="ne", width=97, height=25)
 
    auto_go_btn = Button(
       window_main,

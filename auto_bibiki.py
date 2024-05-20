@@ -160,12 +160,11 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
     window_bibiki_change.grid_columnconfigure(0, weight=1)
 
     def go_back_3():
-        for widget in window_bibiki_change.winfo_children():
-            widget.destroy()
+        window_bibiki_change.destroy()
         main_window_func()
 
     back_btn = Button(
-        frame,
+        window_bibiki_change,
         text="Назад",
         command=go_back_3,
         bg="#CDAA7D",
