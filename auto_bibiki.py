@@ -141,50 +141,49 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
 
 def bibiki_change_window(window_bibiki_change, main_window_func):
     window_bibiki_change.title('create bibika')
+    window_bibiki_change.geometry('850x600')
     window_bibiki_change.grab_set()
     window_bibiki_change.resizable(False, False)
 
     frame = Frame(window_bibiki_change, padx=10, pady=10)
     frame.pack(expand=True, fill="both")
 
-    def go_back_3():
-        window_bibiki_change.destroy()
-        main_window_func()
+    # Center frame for labels and entries
+    center_frame = Frame(frame)
+    center_frame.grid(row=1, column=1, padx=10, pady=10, sticky='nsew')
 
-    back_btn = Button(
-        window_bibiki_change,
-        text="Отмена и выйти",
-        command=go_back_3,
-        fg="#6E7B8B",
-        font=("comic sans", 11),
-        relief="flat",
-        borderwidth=0,
-        width=10,
-        height=1,
-    )
-    back_btn.place(x=750, y=555)
+    # Expand the center frame to fill available space
+    frame.grid_rowconfigure(0, weight=1)
+    frame.grid_rowconfigure(2, weight=1)
+    frame.grid_columnconfigure(0, weight=1)
+    frame.grid_columnconfigure(2, weight=1)
 
     # Labels and Entries for Марка, Модель, Цена
-    Label(frame, text="Марка").grid(row=0, column=0, padx=5, pady=5, sticky='w')
-    brand_entry = Entry(frame, width=30)
+    Label(center_frame, text="Марка", fg="#6E7B8B", font=("comic sans", 11)).grid(row=0, column=0, padx=5, pady=5,
+                                                                                  sticky='w')
+    brand_entry = Entry(center_frame, width=30)
     brand_entry.grid(row=0, column=1, padx=5, pady=5, sticky='w')
 
-    Label(frame, text="Модель").grid(row=1, column=0, padx=5, pady=5, sticky='w')
-    model_entry = Entry(frame, width=30)
+    Label(center_frame, text="Модель", fg="#6E7B8B", font=("comic sans", 11)).grid(row=1, column=0, padx=5, pady=5,
+                                                                                   sticky='w')
+    model_entry = Entry(center_frame, width=30)
     model_entry.grid(row=1, column=1, padx=5, pady=5, sticky='w')
 
-    Label(frame, text="Цена").grid(row=2, column=0, padx=5, pady=5, sticky='w')
-    price_entry = Entry(frame, width=30)
+    Label(center_frame, text="Цена", fg="#6E7B8B", font=("comic sans", 11)).grid(row=2, column=0, padx=5, pady=5,
+                                                                                 sticky='w')
+    price_entry = Entry(center_frame, width=30)
     price_entry.grid(row=2, column=1, padx=5, pady=5, sticky='w')
 
     # Label and Text for Описание
-    Label(frame, text="Описание").grid(row=3, column=0, padx=5, pady=5, sticky='nw')
-    description_text = Text(frame, width=40, height=5)
+    Label(center_frame, text="Описание", fg="#6E7B8B", font=("comic sans", 11)).grid(row=3, column=0, padx=5, pady=5,
+                                                                                     sticky='nw')
+    description_text = Text(center_frame, width=39, height=5)
     description_text.grid(row=3, column=1, padx=5, pady=5, sticky='w')
 
     # Photo Label
-    photo_label = Label(frame, text="Фото", relief="solid", width=40, height=10)
+    photo_label = Label(center_frame, text="Фото", relief="solid", width=40, height=8)
     photo_label.grid(row=0, column=2, rowspan=4, padx=10, pady=5, sticky='nsew')
+    photo_label.grid_propagate(False)
 
     # Variable to store the path of the uploaded photo
     photo_path = ""
@@ -196,13 +195,14 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         if file_path:
             photo_path = file_path
             image = Image.open(file_path)
-            image = image.resize((850, 500))
+            image.thumbnail((300, 300))  # This maintains the aspect ratio while fitting into the box
             photo = ImageTk.PhotoImage(image)
             photo_label.config(image=photo, text="")
             photo_label.image = photo  # Keep a reference to avoid garbage collection
 
     # Button to upload a photo
-    upload_btn = Button(frame, text="Загрузить фото", command=upload_photo)
+    upload_btn = Button(center_frame, text="Загрузить фото", command=upload_photo, fg="#6E7B8B",
+                        font=("comic sans", 11))
     upload_btn.grid(row=4, column=2, padx=10, pady=5, sticky='e')
 
     # Function to handle Ok button click
@@ -234,8 +234,23 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
 
         messagebox.showinfo("Успешно", "Бибика успешно сохранена!")
 
-    ok_btn = Button(frame, text="Ok", command=save_bibika)
-    ok_btn.grid(row=5, column=2, sticky='e', padx=5, pady=5)
+    ok_btn = Button(window_bibiki_change, text="ОК", command=save_bibika, fg="#6E7B8B", font=("comic sans", 11),
+                    relief="flat", borderwidth=0, width=1, height=1)
+    ok_btn.place(x=700, y=555)
 
+    def go_back_3():
+        window_bibiki_change.destroy()
+        main_window_func()
 
-
+    back_btn = Button(
+        window_bibiki_change,
+        text="Отмена и выйти",
+        command=go_back_3,
+        fg="#6E7B8B",
+        font=("comic sans", 11),
+        relief="flat",
+        borderwidth=0,
+        width=9,
+        height=1,
+    )
+    back_btn.place(x=750, y=555)
