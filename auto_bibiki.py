@@ -211,7 +211,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         model = model_entry.get()
         price = price_entry.get()
         description = description_text.get("1.0", "end-1c")
-        if not (brand and model and price and description):
+        if not (brand and model and price and photo_path and description):
             messagebox.showerror("Ошибка", "Все поля должны быть заполнены!")
             return
         try:
