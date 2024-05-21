@@ -6,11 +6,11 @@ import auto_bibiki
 import auto_manager
 
 
-def add_my_bibiki_button(window_main, canvas, login, password):
+def add_info_man_button(window_main, canvas, login, password):
     user = auto_manager.get_auth(login, password)
     if user:
-        global my_bibiki_btn
-        my_bibiki_btn = Button(
+        global info_man_go_btn
+        info_man_go_btn = Button(
             window_main,
             text=f"{user[2]}",
             command=lambda: auto_manager.info_man_window(user, main_window, window_main),
@@ -19,12 +19,30 @@ def add_my_bibiki_button(window_main, canvas, login, password):
             relief="flat",
             borderwidth=0,
         )
-        canvas.create_window((30, 10), anchor="nw", window=my_bibiki_btn, width=115, height=25)
+        canvas.create_window((30, 10), anchor="nw", window=info_man_go_btn, width=115, height=25)
+
+def open_bibiki_change_window():
+    for widget in window_main.winfo_children():
+        widget.destroy()
+    auto_bibiki.bibiki_change_window(window_main, main_window)
+
+
+def add_bibiki_change_button(window_main, canvas):
+    global bibiki_change_go_btn
+    bibiki_change_go_btn = Button(
+        window_main,
+        text="Изменить бибики",
+        command=open_bibiki_change_window,
+        fg="#6E7B8B",
+        font=("comic sans", 11),
+        relief="flat",
+        borderwidth=0,
+    )
+    canvas.create_window((708, 10), anchor="nw", window=bibiki_change_go_btn, width=115, height=25)
 
 
 def main_window():
     global manager_go_btn, window_main, canvas
-
     window_main = Tk()
     window_main.title("bibika.ru")
     window_main.geometry('850x600')
@@ -61,8 +79,7 @@ def main_window():
     manager_go_btn = Button(
         window_main,
         text="Личный кабинет",
-        command=lambda: auto_manager.auth_lk_window(
-            lambda login, password: add_my_bibiki_button(window_main, canvas, login, password)),
+        command=lambda: auto_manager.auth_lk_window(lambda login, password: add_info_man_button(window_main, canvas, login, password), add_bibiki_change_button, window_main, canvas),
         fg="#6E7B8B",
         font=("comic sans", 11),
         relief="flat",

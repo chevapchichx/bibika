@@ -10,7 +10,7 @@ def toggle_password(password_entry):
         password_entry.config(show='')
 
 
-def auth_lk_window(add_my_bibiki_button):
+def auth_lk_window(add_info_man_go_button, add_bibiki_change_button, window_main, canvas):
     window_lk = Toplevel()
     window_lk.title("lk")
     window_lk.geometry('360x140+100+125')
@@ -36,8 +36,8 @@ def auth_lk_window(add_my_bibiki_button):
     show_pass_checkbox.grid(row=5, column=2)
 
     ent_btn = Button(frame, text="Войти", fg="#6E7B8B",
-                     command=lambda: [add_my_bibiki_button(login_entry.get(), password_entry.get()),
-                                      window_lk.destroy()])
+                     command=lambda: [add_info_man_go_button(login_entry.get(), password_entry.get()),
+                                      window_lk.destroy()] and add_bibiki_change_button(window_main, canvas))
     ent_btn.grid(row=6, column=2)
 
 

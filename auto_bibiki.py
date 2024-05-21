@@ -42,10 +42,9 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
         main_window_func()
 
     back_btn = Button(
-        frame,
+        parent_frame,
         text="Назад",
         command=go_back_1,
-        # bg="#CDAA7D",
         fg="#6E7B8B",
         font=("comic sans", 11),
         relief="flat",
@@ -53,7 +52,7 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
         width=6,
         height=1,
     )
-    back_btn.pack(side="bottom", pady=10)
+    back_btn.place(x=750, y=555)
 
 
 def get_bibiki():
@@ -131,7 +130,6 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
         frame,
         text="Назад",
         command=go_back_2,
-        # bg="#CDAA7D",
         fg="#6E7B8B",
         font=("comic sans", 11),
         relief="flat",
@@ -143,16 +141,15 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
 
 
 def bibiki_change_window(window_bibiki_change, main_window_func):
-    window_bibiki_change.title('my bibikas')
-    window_bibiki_change.geometry('850x600')
-    window_bibiki_change.resizable(False, False)
+    window_bibiki_change.title('change bibikas')
+    window_bibiki_change.grab_set()
 
     frame = Frame(
         window_bibiki_change,
         padx=0,
         pady=0,
     )
-    frame.pack()
+    frame.pack(expand=True)
 
     def go_back_3():
         window_bibiki_change.destroy()
@@ -160,17 +157,17 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
 
     back_btn = Button(
         window_bibiki_change,
-        text="Назад",
+        text="Отмена и выйти",
         command=go_back_3,
-        # bg="#CDAA7D",
         fg="#6E7B8B",
         font=("comic sans", 11),
         relief="flat",
         borderwidth=0,
-        width=6,
+        width=10,
         height=1,
     )
     back_btn.place(x=750, y=555)
-    back_btn.lift()
+    # back_btn.lift()
+    window_bibiki_change.mainloop()
 
-bibiki_contents_window(parent_frame=tk.Tk())
+
