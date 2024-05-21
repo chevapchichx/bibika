@@ -1,9 +1,25 @@
 import sqlite3
 import tkinter as tk
-from tkinter import Tk, Toplevel, Frame, Button, Label
+from tkinter import Tk, Toplevel, Frame, Button, Label, Entry, Text, filedialog, messagebox
 from io import BytesIO
 from PIL import Image, ImageTk
-from tkinter import messagebox
+
+
+def get_bibiki():
+    with sqlite3.connect("db/auto_shop.db") as BD:
+        cursor = BD.cursor()
+        cursor.execute("SELECT ID_A, Brand, Model, Price, Description FROM auto")
+        bibiki = cursor.fetchall()
+        return bibiki
+
+
+def get_image_from_db(bibiki):
+    conn = sqlite3.connect('db/auto_shop.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT Photo FROM auto WHERE ID_A = ?", (bibiki[0],))
+    image_data = cursor.fetchone()[0]
+    conn.close()
+    return image_data
 
 
 def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
@@ -53,23 +69,6 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
         height=1,
     )
     back_btn.place(x=750, y=555)
-
-
-def get_bibiki():
-    with sqlite3.connect("db/auto_shop.db") as BD:
-        cursor = BD.cursor()
-        cursor.execute("SELECT ID_A, Brand, Model, Price, Description FROM auto")
-        bibiki = cursor.fetchall()
-        return bibiki
-
-
-def get_image_from_db(bibiki):
-    conn = sqlite3.connect('db/auto_shop.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT Photo FROM auto WHERE ID_A = ?", (bibiki[0],))
-    image_data = cursor.fetchone()[0]
-    conn.close()
-    return image_data
 
 
 def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
@@ -141,15 +140,12 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
 
 
 def bibiki_change_window(window_bibiki_change, main_window_func):
-    window_bibiki_change.title('change bibikas')
+    window_bibiki_change.title('create bibika')
     window_bibiki_change.grab_set()
+    window_bibiki_change.resizable(False, False)
 
-    frame = Frame(
-        window_bibiki_change,
-        padx=0,
-        pady=0,
-    )
-    frame.pack(expand=True)
+    frame = Frame(window_bibiki_change, padx=10, pady=10)
+    frame.pack(expand=True, fill="both")
 
     def go_back_3():
         window_bibiki_change.destroy()
@@ -167,7 +163,79 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         height=1,
     )
     back_btn.place(x=750, y=555)
-    # back_btn.lift()
-    window_bibiki_change.mainloop()
+
+    # Labels and Entries for Марка, Модель, Цена
+    Label(frame, text="Марка").grid(row=0, column=0, padx=5, pady=5, sticky='w')
+    brand_entry = Entry(frame, width=30)
+    brand_entry.grid(row=0, column=1, padx=5, pady=5, sticky='w')
+
+    Label(frame, text="Модель").grid(row=1, column=0, padx=5, pady=5, sticky='w')
+    model_entry = Entry(frame, width=30)
+    model_entry.grid(row=1, column=1, padx=5, pady=5, sticky='w')
+
+    Label(frame, text="Цена").grid(row=2, column=0, padx=5, pady=5, sticky='w')
+    price_entry = Entry(frame, width=30)
+    price_entry.grid(row=2, column=1, padx=5, pady=5, sticky='w')
+
+    # Label and Text for Описание
+    Label(frame, text="Описание").grid(row=3, column=0, padx=5, pady=5, sticky='nw')
+    description_text = Text(frame, width=40, height=5)
+    description_text.grid(row=3, column=1, padx=5, pady=5, sticky='w')
+
+    # Photo Label
+    photo_label = Label(frame, text="Фото", relief="solid", width=40, height=10)
+    photo_label.grid(row=0, column=2, rowspan=4, padx=10, pady=5, sticky='nsew')
+
+    # Variable to store the path of the uploaded photo
+    photo_path = ""
+
+    # Function to upload a photo
+    def upload_photo():
+        nonlocal photo_path
+        file_path = filedialog.askopenfilename()
+        if file_path:
+            photo_path = file_path
+            image = Image.open(file_path)
+            image = image.resize((850, 500))
+            photo = ImageTk.PhotoImage(image)
+            photo_label.config(image=photo, text="")
+            photo_label.image = photo  # Keep a reference to avoid garbage collection
+
+    # Button to upload a photo
+    upload_btn = Button(frame, text="Загрузить фото", command=upload_photo)
+    upload_btn.grid(row=4, column=2, padx=10, pady=5, sticky='e')
+
+    # Function to handle Ok button click
+    def save_bibika():
+        brand = brand_entry.get()
+        model = model_entry.get()
+        price = price_entry.get()
+        description = description_text.get("1.0", "end-1c")
+        if not (brand and model and price and description):
+            messagebox.showerror("Ошибка", "Все поля должны быть заполнены!")
+            return
+        try:
+            price = float(price)
+        except ValueError:
+            messagebox.showerror("Ошибка", "Цена должна состоять из цифр!")
+            return
+
+        if photo_path:
+            with open(photo_path, 'rb') as f:
+                photo_data = f.read()
+        else:
+            photo_data = None
+
+        with sqlite3.connect("db/auto_shop.db") as BD:
+            cursor = BD.cursor()
+            cursor.execute("INSERT INTO auto (Brand, Model, Price, Description, Photo) VALUES (?, ?, ?, ?, ?)",
+                           (brand, model, price, description, photo_data))
+            BD.commit()
+
+        messagebox.showinfo("Успешно", "Бибика успешно сохранена!")
+
+    ok_btn = Button(frame, text="Ok", command=save_bibika)
+    ok_btn.grid(row=5, column=2, sticky='e', padx=5, pady=5)
+
 
 

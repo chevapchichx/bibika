@@ -31,7 +31,7 @@ def add_bibiki_change_button(window_main, canvas):
     global bibiki_change_go_btn
     bibiki_change_go_btn = Button(
         window_main,
-        text="Изменить бибики",
+        text="Добавить бибику",
         command=open_bibiki_change_window,
         fg="#6E7B8B",
         font=("comic sans", 11),
