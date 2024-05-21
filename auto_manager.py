@@ -35,9 +35,16 @@ def auth_lk_window(add_info_man_go_button, add_bibiki_change_button, window_main
     show_pass_checkbox = tk.Checkbutton(frame, text="Показать пароль", command=lambda: toggle_password(password_entry))
     show_pass_checkbox.grid(row=5, column=2)
 
+    def on_ent_btn_click():
+        user = get_auth(login_entry.get(), password_entry.get())
+        if user:
+            add_info_man_go_button(login_entry.get(), password_entry.get())
+            add_bibiki_change_button(window_main, canvas)
+            window_main.show_delete_btn = True
+            window_lk.destroy()
+
     ent_btn = Button(frame, text="Войти", fg="#6E7B8B",
-                     command=lambda: [add_info_man_go_button(login_entry.get(), password_entry.get()),
-                                      window_lk.destroy()] and add_bibiki_change_button(window_main, canvas))
+                     command=on_ent_btn_click)
     ent_btn.grid(row=6, column=2)
 
 
@@ -91,6 +98,3 @@ def info_man_window(user, main_window, window_main):
 
     frame.grid_rowconfigure(4, weight=1)
     frame.grid_columnconfigure(3, weight=1)
-
-
-

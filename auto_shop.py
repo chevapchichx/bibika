@@ -21,6 +21,7 @@ def add_info_man_button(window_main, canvas, login, password):
         )
         canvas.create_window((30, 10), anchor="nw", window=info_man_go_btn, width=115, height=25)
 
+
 def open_bibiki_change_window():
     for widget in window_main.winfo_children():
         widget.destroy()
@@ -42,11 +43,13 @@ def add_bibiki_change_button(window_main, canvas):
 
 
 def main_window():
-    global manager_go_btn, window_main, canvas
+    global manager_go_btn, window_main, canvas, show_delete_btn
     window_main = Tk()
     window_main.title("bibika.ru")
     window_main.geometry('850x600')
     window_main.resizable(False, False)
+
+    window_main.show_delete_btn = False
 
     frame = Frame(window_main, padx=0, pady=0)
     frame.pack(expand=True, fill="both")
@@ -63,7 +66,7 @@ def main_window():
     def open_bibiki_contents_window():
         for widget in window_main.winfo_children():
             widget.destroy()
-        auto_bibiki.bibiki_contents_window(window_main, open_bibiki_contents_window, main_window)
+        auto_bibiki.bibiki_contents_window(window_main, main_window)
 
     auto_go_btn = Button(
         window_main,
