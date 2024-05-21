@@ -175,7 +175,6 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
     center_frame = Frame(frame)
     center_frame.grid(row=1, column=1, padx=10, pady=10, sticky='nsew')
 
-    # Expand the center frame to fill available space
     frame.grid_rowconfigure(0, weight=1)
     frame.grid_rowconfigure(2, weight=1)
     frame.grid_columnconfigure(0, weight=1)
@@ -209,24 +208,22 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
 
     photo_path = ""
 
-    # Function to upload a photo
     def upload_photo():
         nonlocal photo_path
         file_path = filedialog.askopenfilename()
         if file_path:
             photo_path = file_path
             image = Image.open(file_path)
-            image.thumbnail((300, 300))  # This maintains the aspect ratio while fitting into the box
+            image.thumbnail((300, 300))
             photo = ImageTk.PhotoImage(image)
             photo_label.config(image=photo, text="")
-            photo_label.image = photo  # Keep a reference to avoid garbage collection
+            photo_label.image = photo
 
     # Button to upload a photo
     upload_btn = Button(center_frame, text="Загрузить фото", command=upload_photo, fg="#6E7B8B",
                         font=("comic sans", 11))
     upload_btn.grid(row=4, column=2, padx=10, pady=5, sticky='e')
 
-    # Function to handle Ok button click
     def save_bibika():
         brand = brand_entry.get()
         model = model_entry.get()
