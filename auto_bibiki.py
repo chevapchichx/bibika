@@ -126,7 +126,7 @@ def bibika_window(bibika_window, bibiki, bibiki_c_window_open, main_window_func)
         bibiki_c_window_open(bibika_window, bibiki_c_window_open, main_window_func)
 
     back_btn = Button(
-        frame,
+        bibika_window,
         text="Назад",
         command=go_back_2,
         fg="#6E7B8B",
@@ -137,6 +137,30 @@ def bibika_window(bibika_window, bibiki, bibiki_c_window_open, main_window_func)
         height=1,
     )
     back_btn.place(x=750, y=555)
+
+    def delete_bibika():
+        if messagebox.askyesno("Подтверждение", "Вы уверены, что хотите удалить бибику?"):
+            with sqlite3.connect("db/auto_shop.db") as BD:
+                cursor = BD.cursor()
+                cursor.execute("DELETE FROM auto WHERE ID_A = ?", (bibiki[0],))
+                BD.commit()
+            messagebox.showinfo("Удалено", "Бибика успешно удалена!")
+            for widget in bibika_window.winfo_children():
+                widget.destroy()
+            bibiki_c_window_open(bibika_window, bibiki_c_window_open, main_window_func)
+
+    delete_btn = Button(
+        bibika_window,
+        text="Удалить бибику",
+        command=delete_bibika,
+        fg="#6E7B8B",
+        font=("comic sans", 11),
+        relief="flat",
+        borderwidth=0,
+        width=10,
+        height=1,
+    )
+    delete_btn.place(x=20, y=555)
 
 
 def bibiki_change_window(window_bibiki_change, main_window_func):
@@ -173,19 +197,16 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
     price_entry = Entry(center_frame, width=30)
     price_entry.grid(row=2, column=1, padx=5, pady=5, sticky='w')
 
-    # Label and Text for Описание
     Label(center_frame, text="Описание", fg="#6E7B8B", font=("comic sans", 11)).grid(row=3, column=0, padx=5, pady=5,
                                                                                      sticky='nw')
     description_text = Text(center_frame, width=39, height=5)
     description_text.grid(row=3, column=1, padx=5, pady=5, sticky='w')
 
-    # Photo Label
     photo_label = Label(center_frame, text="Фото", relief="solid", width=40, height=8)
     photo_label.place(x=500, y=50)
     photo_label.grid(row=0, column=2, rowspan=4, padx=10, pady=5, sticky='nsew')
     photo_label.grid_propagate(False)
 
-    # Variable to store the path of the uploaded photo
     photo_path = ""
 
     # Function to upload a photo
@@ -236,7 +257,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
 
     ok_btn = Button(window_bibiki_change, text="ОК", command=save_bibika, fg="#6E7B8B", font=("comic sans", 11),
                     relief="flat", borderwidth=0, width=1, height=1)
-    ok_btn.place(x=700, y=555)
+    ok_btn.place(x=690, y=555)
 
     def go_back_3():
         window_bibiki_change.destroy()
@@ -253,4 +274,4 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         width=9,
         height=1,
     )
-    back_btn.place(x=750, y=555)
+    back_btn.place(x=740, y=555)
