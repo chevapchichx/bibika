@@ -71,14 +71,14 @@ def bibiki_contents_window(parent_frame, main_window_open, main_window_func):
     back_btn.place(x=750, y=555)
 
 
-def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
-    parent_frame.title(f"{bibiki[1]} {bibiki[2]}")
-    parent_frame.geometry('850x600')
-    parent_frame.grab_set()
-    parent_frame.resizable(False, False)
+def bibika_window(bibika_window, bibiki, bibiki_c_window_open, main_window_func):
+    bibika_window.title(f"{bibiki[1]} {bibiki[2]}")
+    bibika_window.geometry('850x600')
+    bibika_window.grab_set()
+    bibika_window.resizable(False, False)
 
     frame = Frame(
-        parent_frame,
+        bibika_window,
         padx=0,
         pady=0,
     )
@@ -121,9 +121,9 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     bibika_desc_lb.pack(pady=10)
 
     def go_back_2():
-        for widget in parent_frame.winfo_children():
+        for widget in bibika_window.winfo_children():
             widget.destroy()
-        bibiki_c_window_open(parent_frame, bibiki_c_window_open, main_window_func)
+        bibiki_c_window_open(bibika_window, bibiki_c_window_open, main_window_func)
 
     back_btn = Button(
         frame,
@@ -148,7 +148,6 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
     frame = Frame(window_bibiki_change, padx=10, pady=10)
     frame.pack(expand=True, fill="both")
 
-    # Center frame for labels and entries
     center_frame = Frame(frame)
     center_frame.grid(row=1, column=1, padx=10, pady=10, sticky='nsew')
 
@@ -182,6 +181,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
 
     # Photo Label
     photo_label = Label(center_frame, text="Фото", relief="solid", width=40, height=8)
+    photo_label.place(x=500, y=50)
     photo_label.grid(row=0, column=2, rowspan=4, padx=10, pady=5, sticky='nsew')
     photo_label.grid_propagate(False)
 
