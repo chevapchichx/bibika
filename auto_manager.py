@@ -57,7 +57,7 @@ def get_auth(login, password):
         if user:
             return user
         else:
-            messagebox.showinfo('Ошибка', 'Неверный логин или пароль')
+            messagebox.showinfo('Ошибка', 'Неверный логин или пароль', icon="warning")
             return None
 
 
