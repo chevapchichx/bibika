@@ -250,7 +250,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
             main_window_func()
 
     ok_btn = Button(window_bibiki_change, text="ОК", command=save_bibika, fg="#6E7B8B", font=("comic sans", 11),
-                    relief="flat", borderwidth=0, width=1, height=1)
+                    relief="flat", borderwidth=0, width=2, height=1)
     ok_btn.place(x=700, y=555)
 
     def go_back_3():
@@ -265,7 +265,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         font=("comic sans", 11),
         relief="flat",
         borderwidth=0,
-        width=3,
+        width=5,
         height=1,
     )
     back_btn.place(x=750, y=555)

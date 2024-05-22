@@ -35,7 +35,7 @@ def add_bibiki_change_button(window_main, canvas):
         text="Добавить бибику",
         command=open_bibiki_change_window,
         fg="#6E7B8B",
-        font=("comic sans", 11),
+        font=("comic sans", 10),
         relief="flat",
         borderwidth=0,
     )
