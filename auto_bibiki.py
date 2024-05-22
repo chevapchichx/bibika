@@ -76,7 +76,7 @@ def bibika_window(parent_frame, bibiki, bibiki_c_window_open, main_window_func):
     bibika_desc_lb.pack(pady=10)
 
     def delete_bibika():
-        if messagebox.askyesno("Подтверждение", "Вы уверены, что хотите удалить бибику?", icon="question"):
+        if messagebox.askyesno("Подтверждение", "Вы уверены, что хотите удалить бибику?", icon="warning"):
             with sqlite3.connect("db/auto_shop.db") as BD:
                 cursor = BD.cursor()
                 cursor.execute("DELETE FROM auto WHERE ID_A = ?", (bibiki[0],))
@@ -171,7 +171,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         try:
             price = float(price)
         except ValueError:
-            messagebox.showerror("Ошибка", "Цена должна состоять из цифр!")
+            messagebox.showerror("Ошибка", "Цена должна состоять из цифр!", icon='warning')
             return
 
         photo_data = open(photo_path, 'rb').read()
