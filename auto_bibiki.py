@@ -193,7 +193,7 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
             window_bibiki_change.destroy()
             main_window_func()
 
-    ok_btn = Button(window_bibiki_change, text="ОК", command=save_bibika, fg="#6E7B8B", font=("comic sans", 12),
+    ok_btn = Button(window_bibiki_change, text="ОК", command=save_bibika, fg="#6E7B8B", font=("comic sans", 11),
                     relief="flat", borderwidth=0, width=2, height=1)
     ok_btn.place(x=690, y=555)
 
@@ -201,6 +201,6 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
         window_bibiki_change.destroy()
         main_window_func()
 
-    back_btn = Button(window_bibiki_change, text="Отмена", command=go_back_3, fg="#6E7B8B", font=("comic sans", 12),
+    back_btn = Button(window_bibiki_change, text="Отмена", command=go_back_3, fg="#6E7B8B", font=("comic sans", 11),
                       relief="flat", borderwidth=0, width=5, height=1)
     back_btn.place(x=750, y=555)
