@@ -1,5 +1,5 @@
 import sqlite3
-from tkinter import Toplevel, Frame, Label, Entry, Button, messagebox
+from tkinter import Toplevel, Frame, Label, Entry, Button, messagebox, Checkbutton
 import tkinter as tk
 
 
@@ -20,10 +20,10 @@ def auth_lk_window(add_info_man_go_button, add_bibiki_change_button, window_main
     frame = Frame(window_lk, padx=0, pady=0)
     frame.pack(expand=True)
 
-    login_lb = Label(frame, text="Логин менеджера")
+    login_lb = Label(frame, text="Логин менеджера", font=("comic sans", 12))
     login_lb.grid(row=3, column=1)
 
-    password_lb = Label(frame, text="Пароль менеджера")
+    password_lb = Label(frame, text="Пароль менеджера", font=("comic sans", 12))
     password_lb.grid(row=4, column=1)
 
     login_entry = Entry(frame)
@@ -32,7 +32,8 @@ def auth_lk_window(add_info_man_go_button, add_bibiki_change_button, window_main
     password_entry = Entry(frame, show="*")
     password_entry.grid(row=4, column=2)
 
-    show_pass_checkbox = tk.Checkbutton(frame, text="Показать пароль", command=lambda: toggle_password(password_entry))
+    show_pass_checkbox = Checkbutton(frame, text="Показать пароль", command=lambda: toggle_password(password_entry),
+                                     font=("comic sans", 12))
     show_pass_checkbox.grid(row=5, column=2)
 
     def on_ent_btn_click():
@@ -43,8 +44,7 @@ def auth_lk_window(add_info_man_go_button, add_bibiki_change_button, window_main
             window_main.show_delete_btn = True
             window_lk.destroy()
 
-    ent_btn = Button(frame, text="Войти", fg="#6E7B8B",
-                     command=on_ent_btn_click)
+    ent_btn = Button(frame, text="Войти", fg="#6E7B8B", command=on_ent_btn_click, font=("comic sans", 12))
     ent_btn.grid(row=6, column=2)
 
 
@@ -76,16 +76,16 @@ def info_man_window(user, main_window, window_main):
     space_lb = Label(frame, text="")
     space_lb.grid(row=1, column=0, columnspan=4)
 
-    fio_man_lb = Label(frame, text="ФИО")
+    fio_man_lb = Label(frame, text="ФИО", font=("comic sans", 13))
     fio_man_lb.grid(row=2, column=1)
 
-    fio_man_db = Label(frame, text=user[0])
+    fio_man_db = Label(frame, text=user[0], font=("comic sans", 13))
     fio_man_db.grid(row=2, column=3, )
 
-    phone_man_lb = Label(frame, text="Номер телефона")
+    phone_man_lb = Label(frame, text="Номер телефона", font=("comic sans", 13))
     phone_man_lb.grid(row=3, column=1)
 
-    phone_man_db = Label(frame, text=user[1])
+    phone_man_db = Label(frame, text=user[1], font=("comic sans", 13))
     phone_man_db.grid(row=3, column=3, )
 
     def exit_btn():
@@ -93,7 +93,7 @@ def info_man_window(user, main_window, window_main):
         window_main.destroy()
         main_window()
 
-    exit_btn = Button(frame, text="Выход", command=exit_btn, fg="#6E7B8B", font=("comic sans", 11), relief="flat")
+    exit_btn = Button(frame, text="Выход", command=exit_btn, fg="#6E7B8B", font=("comic sans", 12), relief="flat")
     exit_btn.grid(row=4, column=3, sticky=tk.SE, padx=5, pady=5)
 
     frame.grid_rowconfigure(4, weight=1)
