@@ -11,7 +11,7 @@ def add_info_man_button(window_main, canvas, login, password):
         global info_man_go_btn
         info_man_go_btn = Button(window_main, text=f"{user[2]}",
                                  command=lambda: auto_manager.info_man_window(user, main_window, window_main),
-                                 fg="#6E7B8B", font=("comic sans", 11), relief="flat", borderwidth=0, )
+                                 fg="#6E7B8B", font=("comic sans", 11), relief="flat", borderwidth=0)
         canvas.create_window((30, 10), anchor="nw", window=info_man_go_btn, width=115, height=25)
 
 
