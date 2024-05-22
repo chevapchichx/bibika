@@ -82,7 +82,9 @@ def main_window():
     manager_go_btn = Button(
         window_main,
         text="Личный кабинет",
-        command=lambda: auto_manager.auth_lk_window(lambda login, password: add_info_man_button(window_main, canvas, login, password), add_bibiki_change_button, window_main, canvas),
+        command=lambda: auto_manager.auth_lk_window(
+            lambda login, password: add_info_man_button(window_main, canvas, login, password), add_bibiki_change_button,
+            window_main, canvas),
         fg="#6E7B8B",
         font=("comic sans", 11),
         relief="flat",

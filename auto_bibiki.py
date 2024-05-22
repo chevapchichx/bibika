@@ -229,16 +229,12 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
             messagebox.showerror("Ошибка", "Цена должна состоять из цифр!")
             return
 
-        if photo_path:
-            with open(photo_path, 'rb') as f:
-                photo_data = f.read()
-        else:
-            photo_data = None
+        photo_data = open(photo_path, 'rb').read()
 
         with sqlite3.connect("db/auto_shop.db") as BD:
             cursor = BD.cursor()
-            cursor.execute("INSERT INTO auto (Brand, Model, Price, Description, Photo) VALUES (?, ?, ?, ?, ?)",
-                           (brand, model, price, description, photo_data))
+            cursor.execute("INSERT INTO auto (Brand, Model, Price, Photo, Description) VALUES (?, ?, ?, ?, ?)",
+                           (brand, model, price, photo_data, description))
             BD.commit()
 
         messagebox.showinfo("Успешно", "Бибика успешно сохранена!")
@@ -247,8 +243,8 @@ def bibiki_change_window(window_bibiki_change, main_window_func):
             model_entry.delete(0, 'end')
             price_entry.delete(0, 'end')
             description_text.delete("1.0", "end")
-            photo_label.option_clear()
-            # photo_label.config(text="Фото")
+            # photo_label.option_clear()
+
         else:
             window_bibiki_change.destroy()
             main_window_func()
